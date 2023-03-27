@@ -1,4 +1,4 @@
-const quoteApiUrl = 'https://api.api-ninjas.com/v1/quotes?category=happiness';
+// const quoteApiUrl = 'https://api.api-ninjas.com/v1/quotes?category=happiness';
 const quoteSection = document.getElementById('quote');
 const userInput = document.getElementById('quote-input');
 
@@ -9,11 +9,16 @@ let mistakes = 0;
 
 const renderNewQuote = () => {
   //fetch quote from url
+  // let options = {
+  //   method: 'development',
+  //   headers: { 'x-api-key': process.env.KEY },
+  // };
+
   let options = {
     method: 'GET',
-    headers: { 'x-api-key': KEY },
+    mode: 'cors',
+    headers: { 'x-api-key': process.env.KEY },
   };
-
   let url = 'https://api.api-ninjas.com/v1/quotes?category=happiness';
 
   fetch(url, options)
