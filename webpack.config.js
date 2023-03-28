@@ -4,6 +4,7 @@ const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   entry: './index.js',
   output: {
     filename: 'bundle.js',
@@ -11,22 +12,9 @@ module.exports = {
   // devtool: 'source-maps',
   module: {
     rules: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
       {
-        test: /\.png$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              mimetype: 'image/png',
-            },
-          },
-        ],
-      },
-      { test: /\.css$/, loader: ['style-loader', 'css-loader'] },
-      {
-        test: /\.s(a|c)ss$/,
-        loader: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -43,8 +31,5 @@ module.exports = {
       inject: 'body',
     }),
     new Dotenv(),
-    new webpack.DefinePlugin({
-      process: { env: {} },
-    }),
   ],
 };
