@@ -29,9 +29,24 @@
         id="quote-input"
         placeholder="Type here when the test starts"
       ></textarea>
-      <button id="start-test" onclick="startTest()">Start Test</button>
+      <!-- <button id="start-test" onclick="startTest()">Start Test</button> -->
       <button id="stop-test" onclick="displayResult()">Stop Test</button>
-      <!-- <button id="reset" onclick="reset()">Reset</button> -->
+      <a id="start-test" onclick="startTest()" class="button button--piyo">
+        <div class="button__wrapper">
+          <span class="button__text">Start Test</span>
+        </div>
+        <div class="characterBox">
+          <div class="character wakeup">
+            <div class="character__face"></div>
+          </div>
+          <div class="character wakeup">
+            <div class="character__face"></div>
+          </div>
+          <div class="character">
+            <div class="character__face"></div>
+          </div>
+        </div>
+      </a>
       <div class="result">
         <h3>Result</h3>
         <div class="wrapper">

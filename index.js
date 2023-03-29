@@ -103,9 +103,9 @@ const timeReduce = () => {
 //End Test
 const displayResult = () => {
   //display result div
+  // document.getElementById('stop-test').style.display = 'none';
   document.querySelector('.result').style.display = 'block';
   clearInterval(timer);
-  document.getElementById('stop-test').style.display = 'none';
   userInput.disabled = true;
   let timeTaken = 1;
   if (time !== 0) {
@@ -135,7 +135,7 @@ const startTest = () => {
 window.onload = () => {
   userInput.value = '';
   document.getElementById('start-test').style.display = 'block';
-  document.getElementById('stop-test').style.display = 'block';
+  document.getElementById('stop-test').style.display = 'none';
   userInput.disabled = true;
   renderNewQuote();
 };
