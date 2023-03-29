@@ -8,12 +8,6 @@ let timer = '';
 let mistakes = 0;
 
 const renderNewQuote = () => {
-  //fetch quote from url
-  // let options = {
-  //   method: 'development',
-  //   headers: { 'x-api-key': process.env.KEY },
-  // };
-
   let headers = new Headers();
 
   headers.append('Origin', 'origin');
@@ -73,10 +67,11 @@ userInput.addEventListener('input', () => {
       //Checks if we already have added fail class
       if (!char.classList.contains('fail')) {
         //increment and display mistakes
-        mistakes += 1;
+        mistakes++;
         char.classList.add('fail');
+        // console.log('MISTAKES-->', mistakes);
+        document.getElementById('mistakes').innerText = mistakes;
       }
-      document.getElementById('mistakes').innerText = mistakes;
     }
     //Return true if all the characters are entered correctly
     let check = quoteChars.every(element => {
@@ -89,16 +84,50 @@ userInput.addEventListener('input', () => {
   });
 });
 
+//Update Timer on screen
+function updateTimer() {
+  if (time == 0) {
+    //End test if timer reaches 0
+    displayResult();
+  } else {
+    document.getElementById('timer').innerText = --time + 's';
+  }
+}
+
+//Sets Timer
+const timeReduce = () => {
+  time = 60;
+  timer = setInterval(updateTimer, 1000);
+};
+
 //End Test
 const displayResult = () => {
   //display result div
   document.querySelector('.result').style.display = 'block';
+  clearInterval(timer);
+  document.getElementById('stop-test').style.display = 'none';
+  userInput.disabled = true;
+  let timeTaken = 1;
+  if (time !== 0) {
+    timeTaken = (60 - time) / 100;
+  }
+  document.getElementById('wpm').innerText =
+    (userInput.value.length / 5 / timeTaken).toFixed(2) + 'wpm';
+  document.getElementById('accuracy').innerText =
+    Math.round(
+      ((userInput.value.length - mistakes) / userInput.value.length) * 100
+    ) + '%';
+};
+
+const reset = () => {
+  userInput.value = '';
 };
 
 const startTest = () => {
   mistakes = 0;
   timer = '';
   userInput.disabled = false;
+  timeReduce();
   document.getElementById('start-test').style.display = 'none';
   document.getElementById('stop-test').style.display = 'block';
 };

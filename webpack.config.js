@@ -31,5 +31,8 @@ module.exports = {
       inject: 'body',
     }),
     new Dotenv(),
+    new webpack.ProvidePlugin({
+      process: 'process/browser',
+    }),
   ],
 };
