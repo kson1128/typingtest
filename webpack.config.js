@@ -4,7 +4,7 @@ const Dotenv = require('dotenv-webpack');
 const path = require('path');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: './index.js',
   output: {
     filename: 'bundle.js',
@@ -13,8 +13,22 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /\\.js$/,
+        loader: 'babel-loader',
+        exclude: '/node_modules/',
+      },
+      {
+        test: /\\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              modules: true,
+            },
+          },
+        ],
       },
     ],
   },

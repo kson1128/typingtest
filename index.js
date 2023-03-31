@@ -1,6 +1,7 @@
 // const quoteApiUrl = 'https://api.api-ninjas.com/v1/quotes?category=happiness';
 const quoteSection = document.getElementById('quote');
 const userInput = document.getElementById('quote-input');
+// import styles from './style.css';
 
 let quote = '';
 let time = 60;

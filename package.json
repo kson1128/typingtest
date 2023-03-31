@@ -14,8 +14,10 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "css-loader": "^6.7.3",
     "dotenv": "^16.0.3",
     "dotenv-webpack": "^8.0.1",
+    "style-loader": "^3.3.2",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.13.1"
