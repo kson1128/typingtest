@@ -13,30 +13,16 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\\.js$/,
-        loader: 'babel-loader',
-        exclude: '/node_modules/',
-      },
-      {
-        test: /\\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              importLoaders: 1,
-              modules: true,
-            },
-          },
-        ],
+        test: /\.(css)$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
-  devServer: {
-    static: {
-      directory: path.join(__dirname, './'),
-    },
-  },
+  // devServer: {
+  //   static: {
+  //     directory: path.join(__dirname, './'),
+  //   },
+  // },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
