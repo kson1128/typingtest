@@ -120,7 +120,7 @@ const displayResult = () => {
 };
 
 const reset = () => {
-  userInput.value = '';
+  location.reload();
 };
 
 const startTest = () => {
@@ -139,3 +139,11 @@ window.onload = () => {
   userInput.disabled = true;
   renderNewQuote();
 };
+
+window.addEventListener('load', function () {
+  document.querySelector('.popup').style.display = 'block';
+});
+
+document.querySelector('#close').addEventListener('click', function () {
+  document.querySelector('.popup').style.display = 'none';
+});
