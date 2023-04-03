@@ -74,7 +74,7 @@ const renderNewQuote = () => {
   let headers = new Headers();
 
   headers.append('Origin', 'origin');
-  headers.append('Content-Type', 'application/json');
+  // headers.append('Content-Type', 'application/json');
   headers.append('Accept', 'application/json');
   headers.append('x-api-key', process.env.KEY);
 
