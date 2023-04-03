@@ -74,17 +74,19 @@ const renderNewQuote = () => {
   let headers = new Headers();
 
   headers.append('Origin', 'origin');
-  // headers.append('Content-Type', 'application/json');
+  headers.append('Content-Type', 'application/json');
   headers.append('Accept', 'application/json');
+  console.log(process.env.KEY);
   headers.append('x-api-key', process.env.KEY);
 
   let options = {
     method: 'GET',
     mode: 'cors',
     headers: headers,
+    'x-api-key': process.env.KEY,
     // {
     //   'x-api-key': process.env.KEY,
-    // },
+    // }
   };
 
   let url = 'https://api.api-ninjas.com/v1/quotes?category=happiness';
