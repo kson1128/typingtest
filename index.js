@@ -19,7 +19,6 @@ const renderNewQuote = () => {
   // headers.append('Accept-Encoding', 'identity');
   // headers.append('X-Api-Key', apiKey);
 
-  console.log('apiKey', apiKey);
   let options = {
     method: 'GET',
     // mode: 'cors',
@@ -32,8 +31,6 @@ const renderNewQuote = () => {
     .then(response => response.json())
     .then(data => {
       let res = data;
-      console.log('res-', res);
-
       quote = res[0].quote;
 
       //array of characters
