@@ -33,7 +33,7 @@ userInput.addEventListener('input', () => {
         //increment and display mistakes
         mistakes++;
         char.classList.add('fail');
-        console.log('MISTAKES-->', mistakes);
+        // console.log('MISTAKES-->', mistakes);
         document.getElementById('mistakes').innerText = mistakes;
       }
     }
@@ -76,8 +76,9 @@ const renderNewQuote = () => {
   headers.append('Origin', 'origin');
   headers.append('Content-Type', 'application/json');
   headers.append('Accept', 'application/json');
-  headers.append('x-api-key', process.env.KEY);
+  headers.append('x-api-key', process.env.API_KEY);
 
+  console.log('x-api-key', process.env.API_KEY);
   let options = {
     method: 'GET',
     mode: 'cors',
