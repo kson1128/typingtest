@@ -71,25 +71,24 @@ const displayResult = () => {
 };
 
 const renderNewQuote = () => {
+  let apiKey = process.env.API_KEY;
+  let category = 'happiness';
   let headers = new Headers();
 
   headers.append('Origin', 'origin');
   headers.append('Content-Type', 'application/json');
-  headers.append('Accept', 'application/json');
-  headers.append('x-api-key', process.env.API_KEY);
+  // headers.append('Accept', 'application/json');
+  // headers.append('Accept-Encoding', 'identity');
+  headers.append('X-Api-Key', apiKey);
 
-  console.log('x-api-key', process.env.API_KEY);
+  console.log('apiKey', apiKey);
   let options = {
     method: 'GET',
     mode: 'cors',
     headers: headers,
-    // 'x-api-key': process.env.KEY,
-    // {
-    //   'x-api-key': process.env.KEY,
-    // }
   };
 
-  let url = 'https://api.api-ninjas.com/v1/quotes?category=happiness';
+  let url = 'https://api.api-ninjas.com/v1/quotes?category=' + category;
   fetch(url, options)
     .then(response => response.json())
     .then(data => {
