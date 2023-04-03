@@ -8,6 +8,47 @@ let time = 60;
 let timer = '';
 let mistakes = 0;
 
+const renderNewQuote = () => {
+  let apiKey = process.env.API_KEY;
+  let category = 'happiness';
+  let headers = new Headers();
+
+  // headers.append('Origin', 'origin');
+  // headers.append('Content-Type', 'application/json');
+  // headers.append('Accept', 'application/json');
+  // headers.append('Accept-Encoding', 'identity');
+  // headers.append('X-Api-Key', apiKey);
+
+  console.log('apiKey', apiKey);
+  let options = {
+    method: 'GET',
+    mode: 'cors',
+    contentType: 'application/json',
+    headers: { 'X-Api-Key': apiKey },
+  };
+
+  let url = 'https://api.api-ninjas.com/v1/quotes?category=' + category;
+  fetch(url, options)
+    .then(response => response.json())
+    .then(data => {
+      let res = data;
+      console.log('res-', res);
+
+      quote = res[0].quote;
+
+      //array of characters
+      let arr = quote.split('').map(value => {
+        return "<span class='quote-chars'>" + value + '</span>';
+      });
+
+      //join array for displaying
+      quoteSection.innerHTML += arr.join('');
+    })
+    .catch(err => {
+      console.log(`err ${err}`);
+    });
+};
+
 userInput.addEventListener('input', () => {
   let quoteChars = document.querySelectorAll('.quote-chars');
 
@@ -68,46 +109,6 @@ const displayResult = () => {
 
   let startOver = (document.getElementById('reset').style.display = 'block');
   document.getElementById('reset').addEventListener('click', reset);
-};
-
-const renderNewQuote = () => {
-  let apiKey = process.env.API_KEY;
-  let category = 'happiness';
-  let headers = new Headers();
-
-  headers.append('Origin', 'origin');
-  headers.append('Content-Type', 'application/json');
-  // headers.append('Accept', 'application/json');
-  // headers.append('Accept-Encoding', 'identity');
-  headers.append('X-Api-Key', apiKey);
-
-  console.log('apiKey', apiKey);
-  let options = {
-    method: 'GET',
-    mode: 'cors',
-    headers: headers,
-  };
-
-  let url = 'https://api.api-ninjas.com/v1/quotes?category=' + category;
-  fetch(url, options)
-    .then(response => response.json())
-    .then(data => {
-      let res = data;
-      console.log('res-', res);
-
-      quote = res[0].quote;
-
-      //array of characters
-      let arr = quote.split('').map(value => {
-        return "<span class='quote-chars'>" + value + '</span>';
-      });
-
-      //join array for displaying
-      quoteSection.innerHTML += arr.join('');
-    })
-    .catch(err => {
-      console.log(`err ${err}`);
-    });
 };
 
 //Update Timer on screen
