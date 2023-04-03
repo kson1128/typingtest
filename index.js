@@ -1,12 +1,74 @@
 // const quoteApiUrl = 'https://api.api-ninjas.com/v1/quotes?category=happiness';
 const quoteSection = document.getElementById('quote');
 const userInput = document.getElementById('quote-input');
-import '/style.css';
+import './style.css';
 
 let quote = '';
 let time = 60;
 let timer = '';
 let mistakes = 0;
+
+userInput.addEventListener('input', () => {
+  let quoteChars = document.querySelectorAll('.quote-chars');
+
+  quoteChars = Array.from(quoteChars);
+
+  let userInputChars = userInput.value.split('');
+
+  quoteChars.forEach((char, index) => {
+    //Check if the quote character is equal to the input character
+    if (char.innerText === userInputChars[index]) {
+      char.classList.add('success');
+      //If user hasn't entered anything or backspaced
+    } else if (userInputChars[index] === undefined) {
+      if (char.classList.contains('success')) {
+        char.classList.remove('success');
+      } else {
+        char.classList.remove('fail');
+      }
+      //If user enters wrong character
+    } else {
+      //Checks if we already have added fail class
+      if (!char.classList.contains('fail')) {
+        //increment and display mistakes
+        mistakes++;
+        char.classList.add('fail');
+        console.log('MISTAKES-->', mistakes);
+        document.getElementById('mistakes').innerText = mistakes;
+      }
+    }
+    //Return true if all the characters are entered correctly
+    let check = quoteChars.every(element => {
+      return element.classList.contains('success');
+    });
+    //End test if all the characters are entered correctly
+    if (check) {
+      displayResult();
+    }
+  });
+});
+
+//End Test
+const displayResult = () => {
+  //display result div
+  document.querySelector('.result').style.display = 'block';
+  clearInterval(timer);
+  document.getElementById('stop-test').style.display = 'none';
+  userInput.disabled = true;
+  let timeTaken = 1;
+  if (time !== 0) {
+    timeTaken = (60 - time) / 100;
+  }
+  document.getElementById('accuracy').innerText =
+    Math.round(
+      ((userInput.value.length - mistakes) / userInput.value.length) * 100
+    ) + ' %';
+  document.getElementById('wpm').innerText =
+    (userInput.value.length / 5 / timeTaken).toFixed(2) + ' wpm';
+
+  let startOver = (document.getElementById('reset').style.display = 'block');
+  document.getElementById('reset').addEventListener('click', reset);
+};
 
 const renderNewQuote = () => {
   let headers = new Headers();
@@ -45,49 +107,9 @@ const renderNewQuote = () => {
     });
 };
 
-userInput.addEventListener('input', () => {
-  let quoteChars = document.querySelectorAll('.quote-chars');
-
-  quoteChars = Array.from(quoteChars);
-
-  let userInputChars = userInput.value.split('');
-
-  quoteChars.forEach((char, index) => {
-    //Check if the quote character is equal to the input character
-    if (char.innerText === userInputChars[index]) {
-      char.classList.add('success');
-      //If user hasn't entered anything or backspaced
-    } else if (userInputChars[index] === undefined) {
-      if (char.classList.contains('success')) {
-        char.classList.remove('success');
-      } else {
-        char.classList.remove('fail');
-      }
-      //If user enters wrong character
-    } else {
-      //Checks if we already have added fail class
-      if (!char.classList.contains('fail')) {
-        //increment and display mistakes
-        mistakes++;
-        char.classList.add('fail');
-        // console.log('MISTAKES-->', mistakes);
-        document.getElementById('mistakes').innerText = mistakes;
-      }
-    }
-    //Return true if all the characters are entered correctly
-    let check = quoteChars.every(element => {
-      return element.classList.contains('success');
-    });
-    //End test if all the characters are entered correctly
-    if (check) {
-      displayResult();
-    }
-  });
-});
-
 //Update Timer on screen
 function updateTimer() {
-  if (time == 0) {
+  if (time === 0) {
     //End test if timer reaches 0
     displayResult();
   } else {
@@ -99,25 +121,6 @@ function updateTimer() {
 const timeReduce = () => {
   time = 60;
   timer = setInterval(updateTimer, 1000);
-};
-
-//End Test
-const displayResult = () => {
-  //display result div
-  // document.getElementById('stop-test').style.display = 'none';
-  document.querySelector('.result').style.display = 'block';
-  clearInterval(timer);
-  userInput.disabled = true;
-  let timeTaken = 1;
-  if (time !== 0) {
-    timeTaken = (60 - time) / 100;
-  }
-  document.getElementById('wpm').innerText =
-    (userInput.value.length / 5 / timeTaken).toFixed(2) + 'wpm';
-  document.getElementById('accuracy').innerText =
-    Math.round(
-      ((userInput.value.length - mistakes) / userInput.value.length) * 100
-    ) + '%';
 };
 
 const reset = () => {
@@ -137,9 +140,16 @@ window.onload = () => {
   userInput.value = '';
   document.getElementById('start-test').style.display = 'block';
   document.getElementById('stop-test').style.display = 'none';
+  document.getElementById('reset').style.display = 'none';
   userInput.disabled = true;
   renderNewQuote();
 };
+
+let start = document.getElementById('start-test');
+start.addEventListener('click', startTest);
+
+let result = document.getElementById('stop-test');
+result.addEventListener('click', displayResult);
 
 window.addEventListener('load', function () {
   document.querySelector('.popup').style.display = 'block';

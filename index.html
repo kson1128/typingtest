@@ -3,31 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Typing Test</title>
-    <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
       rel="stylesheet"
     />
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="/style.css" />
-    <script type="javascript" src="/bundle.js"></script>
+    <!-- <link href="./style.css" /> -->
   </head>
   <body>
     <div class="popup">
-      <!-- <button id="close">&times;</button> -->
       <h3>Test Your Typing Speed!</h3>
-
       <p>
         Click Start and begin typing to test your speed and accuracy. Check out
         your results at the end when time runs out.
       </p>
-
       <a id="close">Let's Go</a>
-      <!-- <button id="close">Let's Go;</button> -->
     </div>
-
     <div class="container">
       <div class="stats">
         <p>Time: <span id="timer">0s</span></p>
@@ -43,9 +35,8 @@
         id="quote-input"
         placeholder="Type here when the test starts"
       ></textarea>
-
-      <a id="stop-test" onclick="displayResult()" class="button button--pen">
-        <div class="button__wrapper">
+      <a id="stop-test" class="button button--pen"
+        ><div class="button__wrapper">
           <span class="button__text">Stop Test</span>
         </div>
         <div class="characterBox">
@@ -63,10 +54,9 @@
           </div>
         </div>
       </a>
-      <!-- <button id="reset" onclick="reset()">Reset</button> -->
-      <!-- <button id="stop-test" onclick="displayResult()">Stop Test</button> -->
-      <a id="start-test" onclick="startTest()" class="button button--piyo">
-        <div class="button__wrapper">
+
+      <a id="start-test" class="button button--piyo"
+        ><div class="button__wrapper">
           <span class="button__text">Start Test</span>
         </div>
         <div class="characterBox">
@@ -76,11 +66,9 @@
           <div class="character wakeup">
             <div class="character__face"></div>
           </div>
-          <div class="character">
-            <div class="character__face"></div>
-          </div>
-        </div>
-      </a>
+          <div class="character"><div class="character__face"></div></div></div
+      ></a>
+      <button type="button" id="reset">Reset</button>
       <div class="result">
         <h3>Result</h3>
         <div class="wrapper">
@@ -89,8 +77,6 @@
         </div>
       </div>
     </div>
-    <!-- Script -->
-
-    <!-- <script src="index.js"></script> -->
+    <!-- <script type="text/javascript" src="bundle.js"></script> -->
   </body>
 </html>
