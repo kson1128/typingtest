@@ -76,14 +76,13 @@ const renderNewQuote = () => {
   headers.append('Origin', 'origin');
   headers.append('Content-Type', 'application/json');
   headers.append('Accept', 'application/json');
-  console.log(process.env.KEY);
   headers.append('x-api-key', process.env.KEY);
 
   let options = {
     method: 'GET',
     mode: 'cors',
     headers: headers,
-    'x-api-key': process.env.KEY,
+    // 'x-api-key': process.env.KEY,
     // {
     //   'x-api-key': process.env.KEY,
     // }
@@ -94,6 +93,8 @@ const renderNewQuote = () => {
     .then(response => response.json())
     .then(data => {
       let res = data;
+      console.log('res-', res);
+
       quote = res[0].quote;
 
       //array of characters
