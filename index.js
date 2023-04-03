@@ -22,7 +22,7 @@ const renderNewQuote = () => {
   console.log('apiKey', apiKey);
   let options = {
     method: 'GET',
-    mode: 'cors',
+    // mode: 'cors',
     contentType: 'application/json',
     headers: { 'X-Api-Key': apiKey },
   };

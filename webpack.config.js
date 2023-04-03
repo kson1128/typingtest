@@ -35,5 +35,8 @@ module.exports = {
     new webpack.ProvidePlugin({
       process: 'process/browser',
     }),
+    new webpack.DefinePlugin({
+      'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
+    }),
   ],
 };
