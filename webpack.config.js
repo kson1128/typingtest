@@ -2,9 +2,10 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 const path = require('path');
+const ENVIRONMENT = process.env.NODE_ENV;
 
 module.exports = {
-  mode: 'production',
+  mode: ENVIRONMENT,
   entry: './index.js',
   output: {
     filename: 'bundle.js',
